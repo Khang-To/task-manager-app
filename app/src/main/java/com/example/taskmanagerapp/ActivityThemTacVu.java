@@ -45,7 +45,7 @@ public class ActivityThemTacVu extends BottomSheetDialogFragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                String selectedDate = "Ngày hạn: "+dayOfMonth + "/" + (month + 1) + "/" + year;
+                                String selectedDate =dayOfMonth + "/" + (month + 1) + "/" + year;
                                 datNgayHan.setText(selectedDate);
                             }
                         },
