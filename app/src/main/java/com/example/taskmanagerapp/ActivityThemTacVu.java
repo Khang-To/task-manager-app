@@ -44,6 +44,7 @@ public class ActivityThemTacVu extends BottomSheetDialogFragment {
                     getContext(),
                     (view3, year1, month1, dayOfMonth) -> {
                         String selectedDate =dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                        datNgayHan.setBackgroundResource(R.drawable.bg_dachon_tg);
                         datNgayHan.setText(selectedDate);
                     },
                     year, month, day
@@ -69,7 +70,8 @@ public class ActivityThemTacVu extends BottomSheetDialogFragment {
                                 (view1, selectedHour, selectedMinute) -> {
                                     @SuppressLint("DefaultLocale") String datetime = selectedDayOfMonth + "/" + (selectedMonth + 1) + "/" + selectedYear
                                             + " - " + String.format("%02d:%02d", selectedHour, selectedMinute);
-                                    datTGNhac.setText(datetime); // Gán text mới cho nút hoặc TextView
+                                    datTGNhac.setBackgroundResource(R.drawable.bg_dachon_tg);
+                                    datTGNhac.setText(datetime);
                                 },
                                 hour, minute, true
                         );

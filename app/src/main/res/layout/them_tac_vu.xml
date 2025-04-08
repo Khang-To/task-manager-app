@@ -25,30 +25,31 @@
         android:id="@+id/datNgayHan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
+        android:paddingBottom="10sp"
         android:text="Ngày đến hạn"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_calendar_month_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.0"
-        android:paddingBottom="10sp"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/datTGNhac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
+        android:paddingBottom="10sp"
         android:text="Nhắc tôi"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_alarm_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/datNgayHan"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.0"
-        android:paddingBottom="10sp"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnLuu"
