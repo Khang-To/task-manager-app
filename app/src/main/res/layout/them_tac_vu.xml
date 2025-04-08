@@ -36,7 +36,7 @@
         android:paddingBottom="10sp"/>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/datTGNhac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
