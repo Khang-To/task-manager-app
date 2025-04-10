@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmanagerapp.Models.MainModelItem;
 import com.example.taskmanagerapp.R;
+import com.example.taskmanagerapp.TacVuActivity;
+import com.example.taskmanagerapp.ThemDanhSachActivity;
 
 import java.util.List;
 
@@ -35,10 +37,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_QUAN_TRONG) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_quan_trong_main, parent, false);
-            return new TacVuViewHolder(view);
+            return new QuanTrongViewHolder(view);
         } else if (viewType == TYPE_TAC_VU) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_tac_vu_main, parent, false);
-            return new QuanTrongViewHolder(view);
+            return new TacVuViewHolder(view);
         } else if(viewType == TYPE_DANH_SACH){
             View view = LayoutInflater.from(context).inflate(R.layout.item_danh_sach_main, parent, false);
             return new DanhSachViewHolder(view);
@@ -52,33 +54,41 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MainModelItem item = list.get(position);
-        if (holder instanceof DanhSachViewHolder) {
-            ((DanhSachViewHolder) holder).txtTenDanhSach.setText(item.getTenDanhSach());
-        }
 
-//        //sự kiện khi click vào các item
-//        switch (item.getViewType()) {
-//            case TYPE_TAC_VU:
-//                TacVuViewHolder tacVuHolder = (TacVuViewHolder) holder;
-//                tacVuHolder.itemView.setOnClickListener(v -> {
-//                    Intent intent = new Intent(context, TacVuActivity.class);
-//                    context.startActivity(intent);
-//                });
-//                break;
-//
+        //set event gọi các activity
+        switch (item.getViewType()) {
+            case TYPE_TAC_VU:
+                if (holder instanceof TacVuViewHolder) {
+                    // set event click cho item
+                    holder.itemView.setOnClickListener(v -> {
+                        Intent intent = new Intent(context, TacVuActivity.class);
+                        context.startActivity(intent);
+                    });
+                }
+                break;
+
 //            case TYPE_QUAN_TRONG:
-//                QuanTrongViewHolder qtHolder = (QuanTrongViewHolder) holder;
-//                qtHolder.itemView.setOnClickListener(v -> {
-//                    Intent intent = new Intent(context, QuanTrongActivity.class);
-//                    context.startActivity(intent);
-//                });
+//                if (holder instanceof QuanTrongViewHolder) {
+//                    holder.itemView.setOnClickListener(v -> {
+//                        Intent intent = new Intent(context, QuanTrongActivity.class);
+//                        context.startActivity(intent);
+//                    });
+//                }
 //                break;
-//
+
 //            case TYPE_DANH_SACH:
-//                DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
-//                dsHolder.txtListTitle.setText(item.getTenDanhSach());
+//                if (holder instanceof DanhSachViewHolder) {
+//                    DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
+//                    dsHolder.txtTenDanhSach.setText(item.getTenDanhSach());
+//
+//                    dsHolder.itemView.setOnClickListener(v -> {
+//                        Intent intent = new Intent(context, TacVuActivity.class);
+//                        intent.putExtra("tenDanhSach", item.getTenDanhSach());
+//                        context.startActivity(intent);
+//                    });
+//                }
 //                break;
-//        }
+        }
     }
 
     @Override
