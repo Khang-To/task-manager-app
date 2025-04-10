@@ -58,14 +58,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
 //        //sự kiện khi click vào các item
-//        switch (item.getViewType()) {
-//            case TYPE_TAC_VU:
-//                TacVuViewHolder tacVuHolder = (TacVuViewHolder) holder;
-//                tacVuHolder.itemView.setOnClickListener(v -> {
-//                    Intent intent = new Intent(context, TacVuActivity.class);
-//                    context.startActivity(intent);
-//                });
-//                break;
+        switch (item.getViewType()) {
+            case TYPE_TAC_VU:
+                TacVuViewHolder tacVuHolder = (TacVuViewHolder) holder;
+                tacVuHolder.itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(context, TacVuActivity.class);
+                    context.startActivity(intent);
+                });
+                break;
 //
 //            case TYPE_QUAN_TRONG:
 //                QuanTrongViewHolder qtHolder = (QuanTrongViewHolder) holder;
@@ -79,7 +79,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //                DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
 //                dsHolder.txtListTitle.setText(item.getTenDanhSach());
 //               break;
-//        }
+        }
     }
 
     @Override
