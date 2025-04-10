@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmanagerapp.Models.MainModelItem;
 import com.example.taskmanagerapp.R;
+import com.example.taskmanagerapp.TacVuActivity;
 
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //            case TYPE_DANH_SACH:
 //                DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
 //                dsHolder.txtListTitle.setText(item.getTenDanhSach());
-//                break;
+//               break;
 //        }
     }
 
