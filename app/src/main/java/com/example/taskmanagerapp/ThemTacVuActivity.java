@@ -17,12 +17,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
 
-public class ActivityThemTacVu extends BottomSheetDialogFragment {
+public class ThemTacVuActivity extends BottomSheetDialogFragment {
 
     public static final String TAG = "ThemTacVu";
-    public static ActivityThemTacVu newInstance()
+    public static ThemTacVuActivity newInstance()
     {
-        return new ActivityThemTacVu();
+        return new ThemTacVuActivity();
     }
 
     @Override
@@ -96,7 +96,7 @@ public class ActivityThemTacVu extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.them_tac_vu,container,false);
+        return inflater.inflate(R.layout.dialog_them_tac_vu,container,false);
     }
 
 

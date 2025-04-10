@@ -13,15 +13,13 @@
         android:theme="@style/Theme.TaskManagerApp"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityTacVu"
-            android:exported="true" >
+            android:name=".TacVuActivity"
+            android:exported="false" >
         </activity>
 
         <activity
-            android:name=".ActivityManHinhLoad"
-            android:exported="true">
-<!--            Activity khởi đầu-->
-
+            android:name=".ManHinhLoadActivity"
+            android:exported="false">
         </activity>
 
         <activity

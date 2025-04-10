@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ActivityThemTacVu">
+    tools:context=".ThemTacVuActivity">
 
     <EditText
         android:id="@+id/editText"
@@ -25,9 +25,13 @@
         android:id="@+id/datNgayHan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="15dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
         android:text="Ngày đến hạn"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_calendar_month_24"
@@ -44,6 +48,10 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="15dp"
         android:text="Nhắc tôi"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_alarm_24"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,9 +61,9 @@
 
     <ImageButton
         android:id="@+id/btnLuu"
-        android:layout_width="65dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="64dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="Nút lưu"
         android:src="@drawable/baseline_save"

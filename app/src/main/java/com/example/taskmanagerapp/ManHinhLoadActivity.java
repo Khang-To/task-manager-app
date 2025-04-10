@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class ActivityManHinhLoad extends AppCompatActivity {
+public class ManHinhLoadActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class ActivityManHinhLoad extends AppCompatActivity {
         });
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            startActivity(new Intent(ActivityManHinhLoad.this, MainActivity.class));
+            startActivity(new Intent(ManHinhLoadActivity.this, MainActivity.class));
             finish();
         },3000);
     }

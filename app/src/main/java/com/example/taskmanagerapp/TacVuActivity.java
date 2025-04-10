@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ActivityTacVu extends AppCompatActivity {
+public class TacVuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FloatingActionButton btnThemTacVu;
     private ImageButton btnTroVe;
@@ -33,20 +33,20 @@ public class ActivityTacVu extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         btnThemTacVu = findViewById(R.id.btnThemTacVu);
         btnTroVe = findViewById(R.id.btnTroVe);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ActivityTacVu.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(TacVuActivity.this));
         recyclerView.setHasFixedSize(true);
 
         btnThemTacVu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityThemTacVu.newInstance().show(getSupportFragmentManager(), ActivityThemTacVu.TAG);
+                ThemTacVuActivity.newInstance().show(getSupportFragmentManager(), ThemTacVuActivity.TAG);
             }
         });
 
         btnTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityTacVu.this, MainActivity.class);
+                Intent intent = new Intent(TacVuActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
