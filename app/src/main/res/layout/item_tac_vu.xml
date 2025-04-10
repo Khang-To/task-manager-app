@@ -16,10 +16,12 @@
         android:paddingBottom="2dp"
         android:paddingStart="5dp"/>
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageStar"
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:layout_height="48dp"
-        app:srcCompat="@drawable/ic_star" />
+        app:srcCompat="@drawable/ic_star2"
+        android:background="@android:color/transparent"
+        android:contentDescription="nutsao"/>
 
 </LinearLayout>
