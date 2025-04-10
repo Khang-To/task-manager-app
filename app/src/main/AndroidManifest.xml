@@ -13,8 +13,20 @@
         android:theme="@style/Theme.TaskManagerApp"
         tools:targetApi="31">
         <activity
+
+            android:name=".TacVuActivity"
+            android:exported="false" >
+        </activity>
+
+        <activity
+            android:name=".ManHinhLoadActivity"
+            android:exported="false">
+        </activity>
+
+
             android:name=".ThemDanhSachActivity"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
