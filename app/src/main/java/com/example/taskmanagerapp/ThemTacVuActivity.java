@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.taskmanagerapp.DataBase.DataBaseHelper;
+import com.example.taskmanagerapp.Models.CongViec;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
@@ -20,6 +24,16 @@ import java.util.Calendar;
 public class ThemTacVuActivity extends BottomSheetDialogFragment {
 
     public static final String TAG = "ThemTacVu";
+
+    public interface OnTaskAddedListener {
+        void onTaskAdded();
+    }
+    private OnTaskAddedListener listener;
+
+    public void setOnTaskAddedListener(OnTaskAddedListener listener) {
+        this.listener = listener;
+    }
+
     public static ThemTacVuActivity newInstance()
     {
         return new ThemTacVuActivity();
@@ -88,7 +102,26 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText editText = view.findViewById(R.id.editText);
+                String tenCV = editText.getText().toString().trim();
+                String ngayDenHan = datNgayHan.getText().toString().trim();
+                String tgNhac = datTGNhac.getText().toString().trim();
 
+                if (tenCV.isEmpty()) {
+                    editText.setError("Vui lòng nhập công việc");
+                    return;
+                }
+
+                CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, 0);
+
+                DataBaseHelper db = new DataBaseHelper(getContext());
+                db.themCongViec(congViec);
+                Toast.makeText(getContext(), "Đã thêm công việc!", Toast.LENGTH_SHORT).show();
+                if (listener != null) {
+                    listener.onTaskAdded(); // Gọi callback báo cho Activity biết
+                }
+
+                dismiss(); // đóng BottomSheet sau khi lưu
             }
         });
     }

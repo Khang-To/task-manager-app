@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.taskmanagerapp.Models.CongViec;
 import com.example.taskmanagerapp.Models.MainModelItem;
 
 import java.util.ArrayList;
@@ -111,4 +112,60 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return newName;
     }
+
+    public List<CongViec> getAllCongViecTheoDanhSach(int danhSachId) {
+        List<CongViec> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CONG_VIEC + " WHERE " + COLUMN_CV_DS_ID + " = ?", new String[]{String.valueOf(danhSachId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                CongViec cv = new CongViec(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_TEN)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_NGAY_NHAC)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_NGAY_DEN_HAN)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_GHI_CHU)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_TRANG_THAI)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_LOAI)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_DS_ID))
+                );
+                list.add(cv);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    public void themCongViec(CongViec congViec) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("tenCongViec", congViec.getTen());
+        values.put("ngayNhac", congViec.getNgayNhac());
+        values.put("ngayDenHan", congViec.getNgayDenHan());
+        values.put("ghiChu", congViec.getGhiChu());
+        values.put("trangThai", congViec.getTrangThai());
+        values.put("loai", congViec.getLoai());
+        values.put("danhSachId", congViec.getDanhSachId());
+
+        db.insert("CongViec", null, values);
+        db.close();
+    }
+
+    public void xoaCongViec(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("CongViec", "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+    public void capNhatTrangThai(int id, int trangThaiMoi) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("trangThai", trangThaiMoi);
+
+        db.update("CongViec", values, "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+
 }
