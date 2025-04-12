@@ -42,6 +42,23 @@ public class ThemDanhSachActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //-----phần này đã chỉnh sửa
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", -1);
+        String tenDanhSach = intent.getStringExtra("tenDanhSach");
+
+        if (id != -1 && tenDanhSach != null) {
+            // Được truyền từ danh sách cụ thể
+            TextView tvTitle = findViewById(R.id.tvTenDanhSach);
+            tvTitle.setText(tenDanhSach);
+
+        } else {
+            // Không truyền gì là "Tạo mới danh sách"
+            showDialogThemDanhSach();
+        }
+
+        //------------------------------
     }
     private void showDialogThemDanhSach() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -76,18 +76,21 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //                }
 //                break;
 
-//            case TYPE_DANH_SACH:
-//                if (holder instanceof DanhSachViewHolder) {
-//                    DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
-//                    dsHolder.txtTenDanhSach.setText(item.getTenDanhSach());
-//
-//                    dsHolder.itemView.setOnClickListener(v -> {
-//                        Intent intent = new Intent(context, TacVuActivity.class);
-//                        intent.putExtra("tenDanhSach", item.getTenDanhSach());
-//                        context.startActivity(intent);
-//                    });
-//                }
-//                break;
+            //---------------chỗ này đã chỉnh sửa
+            case TYPE_DANH_SACH:
+                if (holder instanceof DanhSachViewHolder) {
+                    DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
+                    dsHolder.txtTenDanhSach.setText(item.getTenDanhSach());
+
+                    dsHolder.itemView.setOnClickListener(v -> {
+                        Intent intent = new Intent(context, ThemDanhSachActivity.class);
+                        intent.putExtra("id",item.getId());
+                        intent.putExtra("tenDanhSach", item.getTenDanhSach());
+                        context.startActivity(intent);
+                    });
+                }
+                break;
+            //----------------
         }
     }
 
