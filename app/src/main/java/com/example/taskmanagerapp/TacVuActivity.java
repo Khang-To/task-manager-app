@@ -161,7 +161,21 @@ public class TacVuActivity extends AppCompatActivity {
     private void loadDanhSach() {
         DataBaseHelper dbHelper = new DataBaseHelper(this);
         int danhSachId = 0;
-        danhSach = dbHelper.getAllCongViecTheoDanhSach(danhSachId);
+        List<CongViec> tatCaCongViec = dbHelper.getAllCongViecTheoDanhSach(danhSachId);
+        List<CongViec> chuaHoanThanh = new ArrayList<>();
+        List<CongViec> daHoanThanh = new ArrayList<>();
+
+        for (CongViec cv : tatCaCongViec) {
+            if (cv.getTrangThai() == 0) {
+                chuaHoanThanh.add(cv);
+            } else {
+                daHoanThanh.add(cv);
+            }
+        }
+
+        danhSach.clear();
+        danhSach.addAll(chuaHoanThanh);  // Việc chưa làm ở trên
+        danhSach.addAll(daHoanThanh);    // Việc đã làm xuống dưới
 
         if (danhSach.isEmpty()) {
             layoutEmpty.setVisibility(View.VISIBLE);
