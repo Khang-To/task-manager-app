@@ -174,8 +174,8 @@ public class TacVuActivity extends AppCompatActivity {
         }
 
         danhSach.clear();
-        danhSach.addAll(chuaHoanThanh);  // Việc chưa làm ở trên
-        danhSach.addAll(daHoanThanh);    // Việc đã làm xuống dưới
+        danhSach.addAll(chuaHoanThanh);
+        danhSach.addAll(daHoanThanh);
 
         if (danhSach.isEmpty()) {
             layoutEmpty.setVisibility(View.VISIBLE);
