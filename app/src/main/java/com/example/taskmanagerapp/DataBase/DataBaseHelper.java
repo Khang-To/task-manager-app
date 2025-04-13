@@ -167,5 +167,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void capNhatLoai(int id, int loai) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("loai", loai);
+        db.update("CongViec", values, "id=?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+
 
 }

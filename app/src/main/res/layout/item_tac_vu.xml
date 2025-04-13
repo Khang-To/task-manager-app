@@ -7,7 +7,7 @@
     android:paddingTop="5dp">
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/checkBoxTrangThai"
         android:layout_width="60dp"
         android:layout_height="48dp"
         app:srcCompat="@drawable/ic_uncheck_radio"
