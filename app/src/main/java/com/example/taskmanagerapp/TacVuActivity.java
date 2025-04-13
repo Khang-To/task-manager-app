@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -92,7 +93,7 @@ public class TacVuActivity extends AppCompatActivity {
 
                 new AlertDialog.Builder(TacVuActivity.this)
                         .setTitle("Xác nhận")
-                        .setMessage("Bạn có chắc muốn xóa công việc này?")
+                        .setMessage(Html.fromHtml("Bạn có chắc muốn xóa công việc <b><i>\"" + congViec.getTen() + "\"</i></b> hay không?"))
                         .setPositiveButton("Có", (dialog, which) -> {
                             // Xóa khỏi DB
                             DataBaseHelper dbHelper = new DataBaseHelper(TacVuActivity.this);
