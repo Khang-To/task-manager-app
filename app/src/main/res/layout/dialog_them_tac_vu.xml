@@ -8,14 +8,14 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="321dp"
-        android:layout_height="48dp"
+        android:layout_width="266dp"
+        android:layout_height="46dp"
         android:layout_marginTop="16dp"
         android:autofillHints=""
-        android:textSize="20sp"
         android:background="@android:color/transparent"
         android:hint="Thêm công việc..."
         android:inputType="text"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.13"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
         android:contentDescription="Nút lưu"
         android:src="@drawable/baseline_save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.344"
         app:layout_constraintStart_toEndOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent" />
 
