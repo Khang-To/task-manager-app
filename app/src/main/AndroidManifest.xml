@@ -13,11 +13,21 @@
         android:theme="@style/Theme.TaskManagerApp"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityChiTiet"
-            android:exported="false" />
+            android:name=".TacVuActivity"
+            android:exported="false" >
+        </activity>
         <activity
-            android:name=".ActivityQuanTrong"
-            android:exported="false" />
+            android:name=".ManHinhLoadActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".ChiTietTacVuActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".QuanTrongActivity"
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
