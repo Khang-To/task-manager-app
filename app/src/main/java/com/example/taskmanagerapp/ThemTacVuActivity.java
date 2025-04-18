@@ -24,6 +24,7 @@ import java.util.Calendar;
 public class ThemTacVuActivity extends BottomSheetDialogFragment {
 
     public static final String TAG = "ThemTacVu";
+    private int danhSachId;
 
     public interface OnTaskAddedListener {
         void onTaskAdded();
@@ -34,9 +35,12 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
         this.listener = listener;
     }
 
-    public static ThemTacVuActivity newInstance()
-    {
-        return new ThemTacVuActivity();
+    public static ThemTacVuActivity newInstance(int danhSachId) {
+        ThemTacVuActivity fragment = new ThemTacVuActivity();
+        Bundle args = new Bundle();
+        args.putInt("danhSachId", danhSachId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -47,6 +51,9 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
         datNgayHan = view.findViewById(R.id.datNgayHan);
         datTGNhac = view.findViewById(R.id.datTGNhac);
         btnLuu = view.findViewById(R.id.btnLuu);
+        if (getArguments() != null) {
+            danhSachId = getArguments().getInt("danhSachId", 0);
+        }
 
         datNgayHan.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
@@ -112,7 +119,7 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
                     return;
                 }
 
-                CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, 0);
+                CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, danhSachId);
 
                 DataBaseHelper db = new DataBaseHelper(getContext());
                 db.themCongViec(congViec);
@@ -131,6 +138,5 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dialog_them_tac_vu,container,false);
     }
-
 
 }

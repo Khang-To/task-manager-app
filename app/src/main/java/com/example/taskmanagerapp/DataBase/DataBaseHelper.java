@@ -85,13 +85,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Hàm thêm danh sách
-    public void themDanhSach(String tenDanhSach) {
+    //-------------sửa chỗ này để có thể lấy id của danh sách vừa tạo-----------------------
+    public long themDanhSach(String tenDanhSach) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_DS_TEN, tenDanhSach);
-        db.insert(TABLE_DANH_SACH, null, values);
+        values.put("tenDanhSach", tenDanhSach);
+        long id = db.insert("DanhSachCongViec", null, values);
         db.close();
+        return id;  //trả về id danh sách vừa tạo ra để có thể tiếp tục thêm tác vụ ngay sau đó bên trong ds
     }
+    //-------------------------------------------------------------------------------------
 
     // Kiểm tra tên danh sách có tồn tại chưa
     public boolean isTenDanhSachExists(String tenDanhSach) {
@@ -112,7 +115,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return newName;
     }
-
     public List<CongViec> getAllCongViecTheoDanhSach(int danhSachId) {
         List<CongViec> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -174,7 +176,4 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update("CongViec", values, "id=?", new String[]{String.valueOf(id)});
         db.close();
     }
-
-
-
 }

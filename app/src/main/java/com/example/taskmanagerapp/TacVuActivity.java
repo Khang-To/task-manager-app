@@ -39,7 +39,6 @@ public class TacVuActivity extends AppCompatActivity {
     private TacVuAdapter adapter;
     private List<CongViec> danhSach;
 
-    private int danhSachId = 0; // Hoặc lấy ID từ Intent nếu cần
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class TacVuActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         btnThemTacVu.setOnClickListener(v -> {
-            ThemTacVuActivity dialog = ThemTacVuActivity.newInstance();
+            ThemTacVuActivity dialog = ThemTacVuActivity.newInstance(0);    // số 0 là thêm danh sách "Tác vụ"
             dialog.setOnTaskAddedListener(() -> {
                 // Gọi lại hàm load danh sách khi có tác vụ mới
                 loadDanhSach();
@@ -157,12 +156,11 @@ public class TacVuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadDanhSach();
-        }
+    }
 
     private void loadDanhSach() {
         DataBaseHelper dbHelper = new DataBaseHelper(this);
-        int danhSachId = 0;
-        List<CongViec> tatCaCongViec = dbHelper.getAllCongViecTheoDanhSach(danhSachId);
+        List<CongViec> tatCaCongViec = dbHelper.getAllCongViecTheoDanhSach(0);  //gán số 0 load danh sách "Tác vụ"
         List<CongViec> chuaHoanThanh = new ArrayList<>();
         List<CongViec> daHoanThanh = new ArrayList<>();
 
@@ -189,4 +187,3 @@ public class TacVuActivity extends AppCompatActivity {
         }
     }
 }
-
