@@ -17,11 +17,17 @@
         android:src="@drawable/ic_home"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:paddingTop="2dp"
         android:text="Tác vụ"
         android:textSize="22dp"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txtSoLuongTacVu"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:paddingTop="2dp"/>
 </LinearLayout>
