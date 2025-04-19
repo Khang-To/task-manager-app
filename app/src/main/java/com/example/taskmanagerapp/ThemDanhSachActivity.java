@@ -33,7 +33,7 @@ public class ThemDanhSachActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        showDialogThemDanhSach();
+
         btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,4 +96,5 @@ public class ThemDanhSachActivity extends AppCompatActivity {
         builder.setCancelable(false); // Không cho bấm ra ngoài để thoát
         builder.show();
     }
+
 }

@@ -2,46 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/chitiet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChiTietTacVuActivity"
     tools:layout_editor_absoluteX="-89dp"
     tools:layout_editor_absoluteY="-64dp">
 
-    <TextView
-        android:id="@+id/datNgayHan3"
-        android:layout_width="265dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="20dp"
-        android:text="Thêm ngày đến hạn"
-        android:textSize="20sp"
-        app:drawableStartCompat="@drawable/baseline_calendar_month_24"
-        app:layout_constraintBottom_toTopOf="@+id/datTGNhac3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.664"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/datTGNhac3"
         android:layout_width="261dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="36dp"
         android:text="Nhắc tôi"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_alarm_24"
         app:layout_constraintBottom_toTopOf="@+id/btnLuuGhiChu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.646"
+        app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/datNgayHan3"
+        android:layout_width="265dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="24dp"
+        android:text="Thêm ngày đến hạn"
+        android:textSize="20sp"
+        app:drawableStartCompat="@drawable/baseline_calendar_month_24"
+        app:layout_constraintBottom_toTopOf="@+id/datTGNhac3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtChiTietTV"
         android:layout_width="266dp"
         android:layout_height="47dp"
         android:layout_marginEnd="36dp"
-        android:text="Quan Trọng"
+        android:text="Chi Tiết "
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
