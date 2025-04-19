@@ -82,7 +82,6 @@ public class TacVuAdapter extends RecyclerView.Adapter<TacVuAdapter.TacVuViewHol
 
     public void setDanhSach(List<CongViec> danhSach) {
         this.list = danhSach;
-        notifyDataSetChanged();
     }
 
     public static class TacVuViewHolder extends RecyclerView.ViewHolder {
