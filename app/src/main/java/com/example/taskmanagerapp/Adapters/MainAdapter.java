@@ -79,6 +79,15 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 //            case TYPE_QUAN_TRONG:
 //                if (holder instanceof QuanTrongViewHolder) {
+//                    DataBaseHelper db = new DataBaseHelper(context);
+//                    int soLuongChuaHoanThanh = db.demTacVuQuanTrongChuaHoanThanh();
+//
+//                    if(soLuongChuaHoanThanh > 0){
+//                        ((QuanTrongViewHolder) holder).txtSoLuongTacVuQT.setText(String.valueOf(soLuongChuaHoanThanh));
+//                    }
+//                    else{
+//                        ((QuanTrongViewHolder) holder).txtSoLuongTacVuQT.setText("");
+//                    }
 //                    holder.itemView.setOnClickListener(v -> {
 //                        Intent intent = new Intent(context, QuanTrongActivity.class);
 //                        context.startActivity(intent);
