@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.taskmanagerapp.DataBase.DataBaseHelper;
 import com.example.taskmanagerapp.Models.MainModelItem;
 import com.example.taskmanagerapp.R;
 import com.example.taskmanagerapp.TacVuActivity;
@@ -59,6 +60,15 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         switch (item.getViewType()) {
             case TYPE_TAC_VU:
                 if (holder instanceof TacVuViewHolder) {
+                    // Gọi database để lấy số lượng tác vụ chưa hoàn thành với danhSachId = 0
+                    DataBaseHelper db = new DataBaseHelper(context);
+                    int soLuongChuaHoanThanh = db.demTacVuChuaHoanThanhTheoDanhSach(0); // bạn phải tạo hàm này
+
+                    if (soLuongChuaHoanThanh > 0) {
+                        ((TacVuViewHolder) holder).txtSoLuongTacVu.setText(String.valueOf(soLuongChuaHoanThanh));
+                    } else {
+                        ((TacVuViewHolder) holder).txtSoLuongTacVu.setText(""); // để trống nếu không có
+                    }
                     // set event click cho item
                     holder.itemView.setOnClickListener(v -> {
                         Intent intent = new Intent(context, TacVuActivity.class);
@@ -82,9 +92,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     DanhSachViewHolder dsHolder = (DanhSachViewHolder) holder;
                     dsHolder.txtTenDanhSach.setText(item.getTenDanhSach());
 
+                    // Gọi database để lấy số lượng tác vụ chưa hoàn thành với danhSachId = 0
+                    DataBaseHelper db = new DataBaseHelper(context);
+                    int soLuongChuaHoanThanh = db.demTacVuChuaHoanThanhTheoDanhSach(item.getId()); // bạn phải tạo hàm này
+
+                    if (soLuongChuaHoanThanh > 0) {
+                        ((DanhSachViewHolder) holder).txtSoLuongTacVuTrongDS.setText(String.valueOf(soLuongChuaHoanThanh));
+                    } else {
+                        ((DanhSachViewHolder) holder).txtSoLuongTacVuTrongDS.setText(""); // để trống nếu không có
+                    }
+
                     dsHolder.itemView.setOnClickListener(v -> {
                         Intent intent = new Intent(context, ThemDanhSachActivity.class);
-                        intent.putExtra("id",item.getId());
+                        intent.putExtra("danhSachId",item.getId());
                         intent.putExtra("tenDanhSach", item.getTenDanhSach());
                         context.startActivity(intent);
                     });
@@ -105,14 +125,18 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class TacVuViewHolder extends RecyclerView.ViewHolder {
+        TextView txtSoLuongTacVu;
         public TacVuViewHolder(View itemView) {
             super(itemView);
+            txtSoLuongTacVu = itemView.findViewById(R.id.txtSoLuongTacVu);
         }
     }
 
     class QuanTrongViewHolder extends RecyclerView.ViewHolder {
+        TextView txtSoLuongTacVuQT;
         public QuanTrongViewHolder(View itemView) {
             super(itemView);
+            txtSoLuongTacVuQT = itemView.findViewById(R.id.txtSoLuongTacVuQT);
         }
     }
 
@@ -124,10 +148,12 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class DanhSachViewHolder extends RecyclerView.ViewHolder {
         TextView txtTenDanhSach;
+        TextView txtSoLuongTacVuTrongDS;
 
         public DanhSachViewHolder(View itemView) {
             super(itemView);
             txtTenDanhSach = itemView.findViewById(R.id.txtListTitle);
+            txtSoLuongTacVuTrongDS = itemView.findViewById(R.id.txtSoLuongTacVuDS);
         }
     }
 }
