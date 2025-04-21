@@ -55,7 +55,7 @@ public class ThemDanhSachActivity extends AppCompatActivity {
             return insets;
         });
 
-        danhSachId = getIntent().getIntExtra("id", -1);
+        danhSachId = getIntent().getIntExtra("danhSachId", -1);
         String tenDanhSach = getIntent().getStringExtra("tenDanhSach");
 
         recyclerViewThemDanhSach = findViewById(R.id.recyclerViewThemDanhSach);

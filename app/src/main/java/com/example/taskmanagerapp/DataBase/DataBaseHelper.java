@@ -176,4 +176,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update("CongViec", values, "id=?", new String[]{String.valueOf(id)});
         db.close();
     }
+
+    // Đếm task chưa hoàn thành theo danh sách
+    public int demTacVuChuaHoanThanhTheoDanhSach(int danhSachId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM CongViec WHERE danhSachId = ? AND trangThai = 0",
+                new String[]{String.valueOf(danhSachId)});
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    // Đếm task quan trọng chưa hoàn thành
+    public int demTacVuQuanTrongChuaHoanThanh() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM CongViec WHERE loai = 1 AND trangThai = 0", null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
 }
