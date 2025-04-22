@@ -202,4 +202,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    //Hàm sửa tên danh sách
+    public void suaTenDanhSach(int id, String tenMoi){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenDanhSach",tenMoi);
+        db.update("DanhSachCongViec",values,"id = ?",new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    //Hàm xóa danh sách và cả tác vụ bên trong
+    public void xoaDanhSach(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Xóa tất cả công việc thuộc danh sách
+        db.delete("CongViec", "danhSachId = ?", new String[]{String.valueOf(id)});
+        // Xóa danh sách
+        db.delete("DanhSachCongViec", "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
 }
