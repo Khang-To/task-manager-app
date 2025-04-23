@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bạn cần cấp quyền thông báo để nhận nhắc nhở!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
 
     private void loadDanhSachLai() {
         itemList.clear();
