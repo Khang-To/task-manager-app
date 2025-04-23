@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private List<MainModelItem> itemList;
     private DataBaseHelper dbHelper;
     private Button btnThemDanhSach;
-    private Button btnThemTacVu; // Nút để mở ThemTacVuActivity NA thêm
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

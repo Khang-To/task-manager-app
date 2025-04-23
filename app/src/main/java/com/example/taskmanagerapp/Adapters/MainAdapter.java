@@ -30,7 +30,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_DANH_SACH = 2;
     private static final int TYPE_DIVIDER = 3;
 
-
     private List<MainModelItem> list;
     private Context context;
     private DanhSachCallback callback;
