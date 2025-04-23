@@ -127,7 +127,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     //Sự kiện click vào item
                     dsHolder.itemView.setOnClickListener(v -> {
                         Intent intent = new Intent(context, ThemDanhSachActivity.class);
-                        intent.putExtra("id",item.getId());
+                        intent.putExtra("danhSachId",item.getId());
                         intent.putExtra("tenDanhSach", item.getTenDanhSach());
                         context.startActivity(intent);
                     });

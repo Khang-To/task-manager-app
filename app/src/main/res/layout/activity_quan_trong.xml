@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/quantrong"
+    android:background="#CC6600"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuanTrongActivity">
@@ -14,6 +15,10 @@
         android:layout_marginTop="24dp"
         android:text="Quan Trọng"
         android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toEndOf="@+id/btnTroVe"
@@ -29,7 +34,8 @@
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_keyboard_backspace_24" />
+        app:srcCompat="@drawable/baseline_keyboard_backspace_24"
+        app:tint="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -50,13 +56,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recyclerView"
-        app:srcCompat="@drawable/quantrongicon" />
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/quantrongicon"
+        app:tint="@color/white" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tác Vụ Quan Trọng Đang Trống"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"

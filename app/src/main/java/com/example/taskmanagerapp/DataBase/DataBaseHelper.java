@@ -207,7 +207,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Trong DataBaseHelper.java NA
-    public void capNhatCongViec(CongViec congViec) {
+    public long capNhatCongViec(CongViec congViec) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_CV_TEN, congViec.getTen());
@@ -217,10 +217,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CV_TRANG_THAI, congViec.getTrangThai());
         values.put(COLUMN_CV_LOAI, congViec.getLoai());
         values.put(COLUMN_CV_DS_ID, congViec.getDanhSachId());
-
-        db.update(TABLE_CONG_VIEC, values, COLUMN_CV_ID + " = ?", new String[]{String.valueOf(congViec.getId())});
+        // Thực hiện cập nhật và lấy số dòng bị ảnh hưởng
+        long rowsAffected = db.update(TABLE_CONG_VIEC, values, COLUMN_CV_ID + " = ?", new String[]{String.valueOf(congViec.getId())});
         db.close();
+        return rowsAffected;
     }
+
     // Phương thức lấy công việc theo ID
     public CongViec getCongViecById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();

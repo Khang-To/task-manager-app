@@ -84,6 +84,8 @@ public class TacVuAdapter extends RecyclerView.Adapter<TacVuAdapter.TacVuViewHol
             int newLoai = (cv.getLoai() == 1) ? 0 : 1;
             cv.setLoai(newLoai);
             dbHelper.capNhatLoai(cv.getId(), newLoai);
+            Intent intent = new Intent("com.example.taskmanagerapp.CONG_VIEC_CHANGED");
+            context.sendBroadcast(intent);
             notifyItemChanged(holder.getAdapterPosition());
         });
 
@@ -100,6 +102,7 @@ public class TacVuAdapter extends RecyclerView.Adapter<TacVuAdapter.TacVuViewHol
                 intent.putExtra("ten", cv.getTen());
                 intent.putExtra("trangThai", cv.getTrangThai());
                 intent.putExtra("loai", cv.getLoai());
+                intent.putExtra("danhSachId", cv.getDanhSachId());
                 // Truyền thông tin về nguồn gốc
                 intent.putExtra("source", "TacVuActivity");
                 // Khởi chạy ChiTietTacVuActivity

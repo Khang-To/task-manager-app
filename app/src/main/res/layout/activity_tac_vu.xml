@@ -5,6 +5,7 @@
     android:id="@+id/tacvu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#6586E6"
     tools:context=".TacVuActivity">
 
 
@@ -15,8 +16,10 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="8dp"
         android:text="Tác vụ"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="5"
         android:textSize="30sp"
-
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,6 +45,7 @@
         android:layout_marginBottom="36dp"
         android:clickable="true"
         android:contentDescription="Thêm tác vụ"
+        android:backgroundTint="#9FD7F9"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,13 +70,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/recyclerView"
             app:layout_constraintVertical_bias="0.871"
-            app:srcCompat="@drawable/empty_task" />
+            app:srcCompat="@drawable/empty_task"
+            app:tint="@android:color/white" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Hiện không có tác vụ nào :("
+            android:shadowColor="@color/black"
+            android:shadowRadius="3"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="@+id/recyclerView"
@@ -90,6 +98,7 @@
         android:contentDescription="Back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/back"
+        app:tint="@android:color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
