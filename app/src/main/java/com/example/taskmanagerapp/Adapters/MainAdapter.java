@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskmanagerapp.Models.MainModelItem;
+import com.example.taskmanagerapp.QuanTrongActivity;
 import com.example.taskmanagerapp.R;
 import com.example.taskmanagerapp.TacVuActivity;
 import com.example.taskmanagerapp.ThemDanhSachActivity;
@@ -67,14 +68,14 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
                 break;
 
-//            case TYPE_QUAN_TRONG:
-//                if (holder instanceof QuanTrongViewHolder) {
-//                    holder.itemView.setOnClickListener(v -> {
-//                        Intent intent = new Intent(context, QuanTrongActivity.class);
-//                        context.startActivity(intent);
-//                    });
-//                }
-//                break;
+            case TYPE_QUAN_TRONG:
+                if (holder instanceof QuanTrongViewHolder) {
+                    holder.itemView.setOnClickListener(v -> {
+                        Intent intent = new Intent(context, QuanTrongActivity.class);
+                        context.startActivity(intent);
+                    });
+                }
+                break;
 
             //---------------chỗ này đã chỉnh sửa
             case TYPE_DANH_SACH:
@@ -84,7 +85,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     dsHolder.itemView.setOnClickListener(v -> {
                         Intent intent = new Intent(context, ThemDanhSachActivity.class);
-                        intent.putExtra("id",item.getId());
+                        intent.putExtra("danhSachId",item.getId());
                         intent.putExtra("tenDanhSach", item.getTenDanhSach());
                         context.startActivity(intent);
                     });

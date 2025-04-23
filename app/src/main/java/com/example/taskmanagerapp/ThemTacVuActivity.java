@@ -127,7 +127,7 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
             }
 
 
-            CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, danhSachId);
+            CongViec congViec = new CongViec(0, tenCV,tgNhac,ngayDenHan, "", 0, 0, danhSachId);
 
             DataBaseHelper db = new DataBaseHelper(getContext());
             long taskId = db.themCongViec(congViec);
