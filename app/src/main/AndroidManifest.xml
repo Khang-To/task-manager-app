@@ -16,6 +16,12 @@
         <receiver android:name=".ReminderReceiver"
             android:exported="false" />
 
+        <activity android:name=".ChiTietTacVuActivity"
+            android:exported="false">
+        </activity>
+        <activity android:name=".QuanTrongActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".TacVuActivity"
             android:exported="false">

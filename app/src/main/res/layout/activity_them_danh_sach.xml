@@ -5,14 +5,19 @@
     android:id="@+id/themds"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#6586E6"
+
     tools:context=".ThemDanhSachActivity">
 
     <TextView
         android:id="@+id/tvTenDS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowRadius="5"
         android:text="Tên danh sách"
         android:textSize="30dp"
         app:layout_constraintStart_toEndOf="@+id/btnBack"
@@ -28,7 +33,8 @@
         android:contentDescription="back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/back"
+        app:tint="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewThemDanhSach"
@@ -44,9 +50,10 @@
         android:id="@+id/btnThemTacVuTrongDS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
+        android:backgroundTint="#9FD7F9"
         android:contentDescription="NutThemTacVuTrongDS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -126,14 +126,26 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
                 return;
             }
 
+            // Kiểm tra nếu tgNhac là ngày quá khứ
+            if (!tgNhac.isEmpty()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault());
+                try {
+                    Date date = sdf.parse(tgNhac);
+                    if (date != null && date.getTime() < System.currentTimeMillis()) {
+                        Toast.makeText(getContext(), "Thời gian nhắc đã qua. Vui lòng chọn lại!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
 
-            CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, danhSachId);
-
+            CongViec congViec = new CongViec(0, tenCV, tgNhac, ngayDenHan, "", 0, 0, danhSachId);
             DataBaseHelper db = new DataBaseHelper(getContext());
             long taskId = db.themCongViec(congViec);
             Toast.makeText(getContext(), "Đã thêm công việc!", Toast.LENGTH_SHORT).show();
 
-            // Sau khi db.themCongViec(congViec);
+            // Đặt thông báo nếu tgNhac hợp lệ
             if (!tgNhac.isEmpty()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault());
                 try {
@@ -141,29 +153,27 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
                     if (date != null) {
                         long triggerTime = date.getTime();
                         Intent intent = new Intent(getContext(), ReminderReceiver.class);
-                        intent.putExtra("taskId", (int) taskId); // Gửi taskId
+                        intent.putExtra("taskId", (int) taskId);
                         intent.putExtra("tenCV", tenCV);
-                        intent.putExtra("ngayDenHan", ngayDenHan); // Nếu muốn
+                        intent.putExtra("ngayDenHan", ngayDenHan);
 
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                                 getContext(),
-                                (int) taskId, // <-- Sử dụng ID duy nhất này
+                                (int) taskId,
                                 intent,
                                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
                         );
 
                         AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // Android 12 trở lên
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                             if (alarmManager.canScheduleExactAlarms()) {
                                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
                             } else {
                                 Toast.makeText(getContext(), "Bạn cần cấp quyền đặt báo thức chính xác trong cài đặt.", Toast.LENGTH_LONG).show();
-                                // Gợi ý mở màn hình cài đặt nếu muốn
                             }
                         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
                         }
-
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -171,10 +181,10 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
             }
 
             if (listener != null) {
-                listener.onTaskAdded(); // Gọi callback báo cho Activity biết
+                listener.onTaskAdded();
             }
 
-            dismiss(); // đóng BottomSheet sau khi lưu
+            dismiss(); // Đóng BottomSheet sau khi lưu
         });
     }
 

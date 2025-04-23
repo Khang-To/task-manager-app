@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chitiet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChiTietTacVuActivity"
+    tools:layout_editor_absoluteX="-89dp"
+    tools:layout_editor_absoluteY="-64dp">
+
+
+    <TextView
+        android:id="@+id/datTGNhac3"
+        android:layout_width="261dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="36dp"
+        android:text="Nhắc tôi"
+        android:textSize="20sp"
+        app:drawableStartCompat="@drawable/baseline_alarm_24"
+        app:layout_constraintBottom_toTopOf="@+id/btnLuuGhiChu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/datNgayHan3"
+        android:layout_width="265dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="24dp"
+        android:text="Thêm ngày đến hạn"
+        android:textSize="20sp"
+        app:drawableStartCompat="@drawable/baseline_calendar_month_24"
+        app:layout_constraintBottom_toTopOf="@+id/datTGNhac3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtChiTietTV"
+        android:layout_width="266dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="36dp"
+        android:text="Chi Tiết "
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <LinearLayout
+        android:id="@+id/layoutCheckEdit"
+        android:layout_width="354dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/datNgayHan3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChiTietTV">
+
+        <CheckBox
+            android:id="@+id/CheckBoxCV"
+            android:layout_width="wrap_content"
+            android:layout_height="61dp" />
+
+        <EditText
+            android:id="@+id/editTextNoiDungCV"
+            android:layout_width="224dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:text="Công Việc cụ thể"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/Star"
+            android:layout_width="84dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:contentDescription="Star"
+            app:srcCompat="@drawable/ic_star_border" />
+    </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/txtGhiChu"
+        android:layout_width="336dp"
+        android:layout_height="330dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/edit_text"
+        android:gravity="start|top"
+        android:hint="Nhập ghi chú..."
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="204dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="16dp"
+        android:text="Thêm Ghi Chú Bên Dưới:"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtGhiChu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnTroVeChiTietTV"
+        android:layout_width="68dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:contentDescription="Trở về"
+        app:layout_constraintEnd_toStartOf="@+id/txtChiTietTV"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <Button
+        android:id="@+id/btnLuuGhiChu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Lưu Ghi Chú"
+        app:layout_constraintBottom_toTopOf="@+id/txtGhiChu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

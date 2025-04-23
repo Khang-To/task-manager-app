@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.taskmanagerapp.DataBase.DataBaseHelper;
 import com.example.taskmanagerapp.Models.MainModelItem;
+import com.example.taskmanagerapp.QuanTrongActivity;
 import com.example.taskmanagerapp.R;
 import com.example.taskmanagerapp.TacVuActivity;
 import com.example.taskmanagerapp.ThemDanhSachActivity;
@@ -88,23 +89,23 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
                 break;
 
-//            case TYPE_QUAN_TRONG:
-//                if (holder instanceof QuanTrongViewHolder) {
-//                    DataBaseHelper db = new DataBaseHelper(context);
-//                    int soLuongChuaHoanThanh = db.demTacVuQuanTrongChuaHoanThanh();
-//
-//                    if(soLuongChuaHoanThanh > 0){
-//                        ((QuanTrongViewHolder) holder).txtSoLuongTacVuQT.setText(String.valueOf(soLuongChuaHoanThanh));
-//                    }
-//                    else{
-//                        ((QuanTrongViewHolder) holder).txtSoLuongTacVuQT.setText("");
-//                    }
-//                    holder.itemView.setOnClickListener(v -> {
-//                        Intent intent = new Intent(context, QuanTrongActivity.class);
-//                        context.startActivity(intent);
-//                    });
-//                }
-//                break;
+            case TYPE_QUAN_TRONG:
+                if (holder instanceof QuanTrongViewHolder) {
+                    DataBaseHelper db = new DataBaseHelper(context);
+                    int soLuongChuaHoanThanh = db.demTacVuQuanTrongChuaHoanThanh();
+
+                    if(soLuongChuaHoanThanh > 0){
+                        ((QuanTrongViewHolder) holder).txtSoLuongTacVuQT.setText(String.valueOf(soLuongChuaHoanThanh));
+                    }
+                    else{
+                        ((QuanTrongViewHolder) holder).txtSoLuongTacVuQT.setText("");
+                    }
+                    holder.itemView.setOnClickListener(v -> {
+                        Intent intent = new Intent(context, QuanTrongActivity.class);
+                        context.startActivity(intent);
+                    });
+                }
+                break;
 
             //---------------chỗ này đã chỉnh sửa
             case TYPE_DANH_SACH:
@@ -197,6 +198,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             txtSoLuongTacVuTrongDS = itemView.findViewById(R.id.txtSoLuongTacVuDS);
         }
     }
+
     //Show dialog sửa tên
     private void showDialogSua(int id, String tenCu) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -246,4 +248,3 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 }
-

@@ -1,10 +1,13 @@
 package com.example.taskmanagerapp.DataBase;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -139,7 +142,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public long themCongViec(CongViec congViec) { //không bị lỗi trùng thông báo
+    public long themCongViec(CongViec congViec) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -155,7 +158,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return id;
     }
-
 
     public void xoaCongViec(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -178,6 +180,87 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update("CongViec", values, "id=?", new String[]{String.valueOf(id)});
         db.close();
     }
+
+    // Lấy danh sách công việc quan trọng
+    public List<CongViec> getCongViecQuanTrong() {
+        List<CongViec> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CONG_VIEC + " WHERE " + COLUMN_CV_LOAI + " = 1", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CongViec cv = new CongViec(
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_TEN)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_NGAY_NHAC)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_NGAY_DEN_HAN)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_GHI_CHU)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_TRANG_THAI)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_LOAI)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_DS_ID))
+                );
+                list.add(cv);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+
+    // Trong DataBaseHelper.java NA
+    public long capNhatCongViec(CongViec congViec) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CV_TEN, congViec.getTen());
+        values.put(COLUMN_CV_NGAY_NHAC, congViec.getNgayNhac());
+        values.put(COLUMN_CV_NGAY_DEN_HAN, congViec.getNgayDenHan());
+        values.put(COLUMN_CV_GHI_CHU, congViec.getGhiChu());
+        values.put(COLUMN_CV_TRANG_THAI, congViec.getTrangThai());
+        values.put(COLUMN_CV_LOAI, congViec.getLoai());
+        values.put(COLUMN_CV_DS_ID, congViec.getDanhSachId());
+        // Thực hiện cập nhật và lấy số dòng bị ảnh hưởng
+        long rowsAffected = db.update(TABLE_CONG_VIEC, values, COLUMN_CV_ID + " = ?", new String[]{String.valueOf(congViec.getId())});
+        db.close();
+        return rowsAffected;
+    }
+
+    // Phương thức lấy công việc theo ID
+    public CongViec getCongViecById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        CongViec congViec = null;
+        Cursor cursor = null;
+
+        try {
+            cursor = db.query(TABLE_CONG_VIEC, null, COLUMN_CV_ID + " = ?", new String[]{String.valueOf(id)}, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                congViec = mapCursorToCongViec(cursor);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Lỗi khi lấy công việc từ database: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return congViec;
+    }
+
+
+    // Phương thức ánh xạ Cursor sang CongViec
+    private CongViec mapCursorToCongViec(Cursor cursor) {
+        int idcv = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_ID));
+        String ten = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_TEN));
+        String ngayNhac = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_NGAY_NHAC));
+        String ngayDenHan = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_NGAY_DEN_HAN));
+        String ghiChu = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CV_GHI_CHU));
+        int trangThai = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_TRANG_THAI));
+        int loai = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_LOAI));
+        int danhSachId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CV_DS_ID));
+        return new CongViec(idcv, ten, ngayNhac, ngayDenHan, ghiChu, trangThai, loai, danhSachId);
+    }
+
 
     // Đếm task chưa hoàn thành theo danh sách
     public int demTacVuChuaHoanThanhTheoDanhSach(int danhSachId) {

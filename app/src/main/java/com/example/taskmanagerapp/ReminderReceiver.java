@@ -37,7 +37,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         // Tạo thông báo
         String contentText ="";
         if (ngayDenHan != null && !ngayDenHan.isEmpty()) {
-            contentText = "Tên công việc: "+tenCV+". Ngày đến hạn: " + ngayDenHan+"\nMau hoàn thành cho xong công việc này";  // Thêm ngày đến hạn vào thông báo
+            contentText = "Tên công việc: "+tenCV+". Ngày đến hạn: " + ngayDenHan+"\nMau hoàn thành xong bạn nhé!";  // Thêm ngày đến hạn vào thông báo
         }
 
         // Tạo thông báo
@@ -54,5 +54,6 @@ public class ReminderReceiver extends BroadcastReceiver {
         // ReminderReceiver.java
         notificationManager.notify(taskId, builder.build());
     }
+
 }
 
