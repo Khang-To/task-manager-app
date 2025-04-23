@@ -1,12 +1,20 @@
 package com.example.taskmanagerapp;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -38,6 +46,32 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Kiểm tra xem quyền thông báo đã được cấp chưa
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Yêu cầu quyền thông báo
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
+
+
+        // Tạo Notification Channel cho các thông báo trên Android 8.0 trở lên
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "TASK_CHANNEL_ID",
+                    "Nhắc nhở công việc",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("Kênh nhắc nhở công việc");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
 
         recyclerView = findViewById(R.id.recycleViewMain);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,6 +112,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Quyền đã được cấp, bạn có thể tiếp tục gửi thông báo
+            } else {
+                // Quyền bị từ chối, bạn có thể thông báo cho người dùng hoặc làm gì đó
+                // Ví dụ: Thông báo cho người dùng rằng họ không thể nhận thông báo
+                Toast.makeText(this, "Bạn cần cấp quyền thông báo để nhận nhắc nhở!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     private void loadDanhSachLai() {
         itemList.clear();
 
@@ -93,5 +142,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         adapter.notifyDataSetChanged();
+
     }
 }

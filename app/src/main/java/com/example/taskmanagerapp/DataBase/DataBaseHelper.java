@@ -139,7 +139,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public void themCongViec(CongViec congViec) {
+    public long themCongViec(CongViec congViec) { //không bị lỗi trùng thông báo
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -151,9 +151,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put("loai", congViec.getLoai());
         values.put("danhSachId", congViec.getDanhSachId());
 
-        db.insert("CongViec", null, values);
+        long id = db.insert("CongViec", null, values); // lấy id vừa thêm
         db.close();
+        return id;
     }
+
 
     public void xoaCongViec(int id) {
         SQLiteDatabase db = this.getWritableDatabase();

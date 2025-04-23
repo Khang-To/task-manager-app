@@ -1,8 +1,13 @@
 package com.example.taskmanagerapp;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +24,11 @@ import com.example.taskmanagerapp.DataBase.DataBaseHelper;
 import com.example.taskmanagerapp.Models.CongViec;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ThemTacVuActivity extends BottomSheetDialogFragment {
 
@@ -46,7 +55,7 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView datNgayHan, datTGNhac ;
+        TextView datNgayHan, datTGNhac;
         ImageButton btnLuu;
         datNgayHan = view.findViewById(R.id.datNgayHan);
         datTGNhac = view.findViewById(R.id.datTGNhac);
@@ -64,7 +73,7 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     getContext(),
                     (view3, year1, month1, dayOfMonth) -> {
-                        String selectedDate =dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                        String selectedDate = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
                         datNgayHan.setBackgroundResource(R.drawable.bg_dachon_tg);
                         datNgayHan.setText(selectedDate);
                     },
@@ -106,37 +115,72 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
 
         });
 
-        btnLuu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText editText = view.findViewById(R.id.editText);
-                String tenCV = editText.getText().toString().trim();
-                String ngayDenHan = datNgayHan.getText().toString().trim();
-                String tgNhac = datTGNhac.getText().toString().trim();
+        btnLuu.setOnClickListener(v -> {
+            EditText editText = view.findViewById(R.id.editText);
+            String tenCV = editText.getText().toString().trim();
+            String ngayDenHan = datNgayHan.getText().toString().trim();
+            String tgNhac = datTGNhac.getText().toString().trim();
 
-                if (tenCV.isEmpty()) {
-                    editText.setError("Vui lòng nhập công việc");
-                    return;
-                }
-
-                CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, danhSachId);
-
-                DataBaseHelper db = new DataBaseHelper(getContext());
-                db.themCongViec(congViec);
-                Toast.makeText(getContext(), "Đã thêm công việc!", Toast.LENGTH_SHORT).show();
-                if (listener != null) {
-                    listener.onTaskAdded(); // Gọi callback báo cho Activity biết
-                }
-
-                dismiss(); // đóng BottomSheet sau khi lưu
+            if (tenCV.isEmpty()) {
+                editText.setError("Vui lòng nhập công việc");
+                return;
             }
+
+
+            CongViec congViec = new CongViec(0, tenCV, "", ngayDenHan, tgNhac, 0, 0, danhSachId);
+
+            DataBaseHelper db = new DataBaseHelper(getContext());
+            long taskId = db.themCongViec(congViec);
+            Toast.makeText(getContext(), "Đã thêm công việc!", Toast.LENGTH_SHORT).show();
+
+            // Sau khi db.themCongViec(congViec);
+            if (!tgNhac.isEmpty()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm", Locale.getDefault());
+                try {
+                    Date date = sdf.parse(tgNhac);
+                    if (date != null) {
+                        long triggerTime = date.getTime();
+                        Intent intent = new Intent(getContext(), ReminderReceiver.class);
+                        intent.putExtra("taskId", (int) taskId); // Gửi taskId
+                        intent.putExtra("tenCV", tenCV);
+                        intent.putExtra("ngayDenHan", ngayDenHan); // Nếu muốn
+
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                getContext(),
+                                (int) taskId, // <-- Sử dụng ID duy nhất này
+                                intent,
+                                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                        );
+
+                        AlarmManager alarmManager = (AlarmManager) requireContext().getSystemService(Context.ALARM_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // Android 12 trở lên
+                            if (alarmManager.canScheduleExactAlarms()) {
+                                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                            } else {
+                                Toast.makeText(getContext(), "Bạn cần cấp quyền đặt báo thức chính xác trong cài đặt.", Toast.LENGTH_LONG).show();
+                                // Gợi ý mở màn hình cài đặt nếu muốn
+                            }
+                        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                        }
+
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (listener != null) {
+                listener.onTaskAdded(); // Gọi callback báo cho Activity biết
+            }
+
+            dismiss(); // đóng BottomSheet sau khi lưu
         });
     }
 
-    @Nullable
+        @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dialog_them_tac_vu,container,false);
     }
-
 }

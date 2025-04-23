@@ -197,7 +197,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             txtSoLuongTacVuTrongDS = itemView.findViewById(R.id.txtSoLuongTacVuDS);
         }
     }
-
     //Show dialog sửa tên
     private void showDialogSua(int id, String tenCu) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -247,3 +246,4 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 }
+
