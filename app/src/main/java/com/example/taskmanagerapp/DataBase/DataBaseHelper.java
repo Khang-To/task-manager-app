@@ -178,4 +178,49 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update("CongViec", values, "id=?", new String[]{String.valueOf(id)});
         db.close();
     }
+
+    // Đếm task chưa hoàn thành theo danh sách
+    public int demTacVuChuaHoanThanhTheoDanhSach(int danhSachId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM CongViec WHERE danhSachId = ? AND trangThai = 0",
+                new String[]{String.valueOf(danhSachId)});
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    // Đếm task quan trọng chưa hoàn thành
+    public int demTacVuQuanTrongChuaHoanThanh() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM CongViec WHERE loai = 1 AND trangThai = 0", null);
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
+    //Hàm sửa tên danh sách
+    public void suaTenDanhSach(int id, String tenMoi){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenDanhSach",tenMoi);
+        db.update("DanhSachCongViec",values,"id = ?",new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    //Hàm xóa danh sách và cả tác vụ bên trong
+    public void xoaDanhSach(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Xóa tất cả công việc thuộc danh sách
+        db.delete("CongViec", "danhSachId = ?", new String[]{String.valueOf(id)});
+        // Xóa danh sách
+        db.delete("DanhSachCongViec", "id = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
 }

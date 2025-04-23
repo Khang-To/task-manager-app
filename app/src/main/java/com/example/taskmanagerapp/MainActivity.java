@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         itemList = new ArrayList<>();
 
         // Thêm 2 mục cứng
-        itemList.add(new MainModelItem(0, -1, null)); // Tác vụ
-        itemList.add(new MainModelItem(1, -1, null)); // Quan trọng
+        itemList.add(new MainModelItem(0, -1, null)); // Quan trọng
+        itemList.add(new MainModelItem(1, -1, null)); // Tác vụ
 
         // Thêm divider ngăn cách
         itemList.add(new MainModelItem(3, -1, null)); // Divider
@@ -93,7 +93,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Gán adapter
-        MainAdapter adapter = new MainAdapter(this, itemList);
+        adapter = new MainAdapter(this, itemList, new MainAdapter.DanhSachCallback() {
+            @Override
+            public void reloadDanhSach() {
+                loadDanhSachLai();
+            }
+        });
         recyclerView.setAdapter(adapter);
 
         //set event cho nút thêm danh sách
@@ -106,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -120,5 +126,22 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bạn cần cấp quyền thông báo để nhận nhắc nhở!", Toast.LENGTH_SHORT).show();
             }
         }
+
+    private void loadDanhSachLai() {
+        itemList.clear();
+
+        // Thêm các mục cố định
+        itemList.add(new MainModelItem(0, -1, null)); // Quan trọng
+        itemList.add(new MainModelItem(1, -1, null)); // Tác vụ
+        itemList.add(new MainModelItem(3, -1, null)); // Divider
+
+        // Lấy lại danh sách từ database
+        List<MainModelItem> danhSachTuDB = dbHelper.getAllDanhSach();
+        for (MainModelItem ds : danhSachTuDB) {
+            itemList.add(new MainModelItem(2, ds.getId(), ds.getTenDanhSach()));
+        }
+
+        adapter.notifyDataSetChanged();
+
     }
 }
