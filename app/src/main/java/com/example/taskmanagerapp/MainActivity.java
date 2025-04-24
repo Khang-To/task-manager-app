@@ -162,4 +162,9 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000); // Reset sau 2 giây
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDanhSachLai();
+    }
 }

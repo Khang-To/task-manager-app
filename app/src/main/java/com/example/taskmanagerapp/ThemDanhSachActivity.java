@@ -229,4 +229,10 @@ public class ThemDanhSachActivity extends AppCompatActivity {
         adapter.setDanhSach(danhSach);
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadDanhSach();
+    }
 }

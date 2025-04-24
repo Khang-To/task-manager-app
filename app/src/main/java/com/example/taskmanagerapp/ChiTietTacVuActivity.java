@@ -50,7 +50,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
     private int id, trangThai, loai;
     private String ten;
     private EditText   txtGhiChu;
-    private TextView datNgayHan3, datTGNhac3;
+//    private TextView datNgayHan3, datTGNhac3;
     private Button btnSave;
     private static final String TAG = "ChiTietTacVuActivity";
     public static final String ACTION_CONG_VIEC_CHANGED = "com.example.taskmanagerapp.CONG_VIEC_CHANGED";
@@ -89,8 +89,8 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             }
         });
 
-        datNgayHan3 = findViewById(R.id.datNgayHan3);
-        datTGNhac3 = findViewById(R.id.datTGNhac3);
+//        datNgayHan3 = findViewById(R.id.datNgayHan3);
+//        datTGNhac3 = findViewById(R.id.datTGNhac3);
         txtGhiChu = findViewById(R.id.txtGhiChu);
         btnSave = findViewById(R.id.btnLuuGhiChu);
 
@@ -114,7 +114,6 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 luuThongTin();
             }
         });
@@ -212,10 +211,13 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
 
         String noiDung = editTextNoiDungCV.getText().toString();
         String thoiGianNhac = txtNhacToi.getText().toString();
-        String ngayDenHan = txtNgayDenHan.getText().toString();
         String ghiChu = txtGhiChu.getText().toString();
         int newLoai = isStarFilled ? 1 : 0;
         int newTrangThai = checkBoxCV.isChecked() ? 1 : 0;
+        String ngayDenHan = txtNgayDenHan.getText().toString().trim();
+        if (ngayDenHan.equals("Ngày đến hạn")) {
+            ngayDenHan = "";
+        }
         try {
             CongViec cv = new CongViec(id, noiDung, thoiGianNhac, ngayDenHan, ghiChu, newTrangThai, newLoai, danhSachId);
             long taskId = dbHelper.capNhatCongViec(cv);
@@ -278,4 +280,5 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             }
         }
     }
+
 }
