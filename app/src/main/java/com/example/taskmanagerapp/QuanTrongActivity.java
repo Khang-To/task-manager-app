@@ -122,6 +122,7 @@ public class QuanTrongActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Đăng ký BroadcastReceiver
+        loadDanhSachCongViecQuanTrong();
         IntentFilter intentFilter = new IntentFilter(ACTION_CONG_VIEC_CHANGED);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(congViecChangedReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);

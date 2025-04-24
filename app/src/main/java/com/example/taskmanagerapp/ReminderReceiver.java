@@ -39,6 +39,9 @@ public class ReminderReceiver extends BroadcastReceiver {
         if (ngayDenHan != null && !ngayDenHan.isEmpty()) {
             contentText = "Tên công việc: "+tenCV+". Ngày đến hạn: " + ngayDenHan+"\nMau hoàn thành xong bạn nhé!";  // Thêm ngày đến hạn vào thông báo
         }
+        else
+            contentText = "Tên công việc: "+tenCV+"\nMau hoàn thành xong bạn nhé!";  // Thêm ngày đến hạn vào thông báo
+
 
         // Tạo thông báo
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "TASK_CHANNEL_ID")

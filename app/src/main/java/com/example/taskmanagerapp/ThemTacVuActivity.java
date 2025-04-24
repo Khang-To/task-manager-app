@@ -118,8 +118,11 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
         btnLuu.setOnClickListener(v -> {
             EditText editText = view.findViewById(R.id.editText);
             String tenCV = editText.getText().toString().trim();
-            String ngayDenHan = datNgayHan.getText().toString().trim();
             String tgNhac = datTGNhac.getText().toString().trim();
+            String ngayDenHan = datNgayHan.getText().toString().trim();
+            if (ngayDenHan.equals("Ngày đến hạn")) {
+                ngayDenHan = "";
+            }
 
             if (tenCV.isEmpty()) {
                 editText.setError("Vui lòng nhập công việc");

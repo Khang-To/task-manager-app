@@ -14,39 +14,38 @@
         android:id="@+id/datTGNhac3"
         android:layout_width="261dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="44dp"
         android:text="Nhắc tôi"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_alarm_24"
-        app:layout_constraintBottom_toTopOf="@+id/btnLuuGhiChu"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/datNgayHan3"
         android:layout_width="265dp"
         android:layout_height="31dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="28dp"
         android:text="Thêm ngày đến hạn"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_calendar_month_24"
         app:layout_constraintBottom_toTopOf="@+id/datTGNhac3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtChiTietTV"
         android:layout_width="266dp"
         android:layout_height="47dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="52dp"
         android:text="Chi Tiết "
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/layoutCheckEdit"
@@ -72,7 +71,7 @@
             android:padding="8dp"
             android:singleLine="true"
             android:text="Công Việc cụ thể"
-            android:textSize="20sp" />
+            android:textSize="23sp" />
 
         <ImageButton
             android:id="@+id/Star"
@@ -84,26 +83,24 @@
     </LinearLayout>
 
 
-
     <EditText
         android:id="@+id/txtGhiChu"
-        android:layout_width="336dp"
-        android:layout_height="330dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="399dp"
+        android:layout_height="259dp"
+        android:layout_marginBottom="100dp"
         android:background="@android:drawable/edit_text"
         android:gravity="start|top"
         android:hint="Nhập ghi chú..."
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="204dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:text="Thêm Ghi Chú Bên Dưới:"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/txtGhiChu"
@@ -114,7 +111,7 @@
     <ImageButton
         android:id="@+id/btnTroVeChiTietTV"
         android:layout_width="68dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:background="@null"
         android:contentDescription="Trở về"
@@ -126,14 +123,13 @@
 
     <Button
         android:id="@+id/btnLuuGhiChu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Lưu Ghi Chú"
-        app:layout_constraintBottom_toTopOf="@+id/txtGhiChu"
+        android:layout_width="235dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="28dp"
+        android:text="Lưu tác vụ"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toEndOf="@+id/textView6" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
