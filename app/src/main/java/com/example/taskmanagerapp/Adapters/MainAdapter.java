@@ -210,14 +210,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         builder.setPositiveButton("Lưu", (dialog, which) -> {
             String tenMoi = input.getText().toString().trim();
+
             if (!tenMoi.isEmpty()) {
-                DataBaseHelper db = new DataBaseHelper(context);
-                String tenKhongTrung = db.generateUniqueTenDanhSach(tenMoi);
-                db.suaTenDanhSach(id, tenKhongTrung);
+                if (!tenMoi.equals(tenCu)) {
+                    DataBaseHelper db = new DataBaseHelper(context);
+                    String tenKhongTrung = db.generateUniqueTenDanhSach(tenMoi);
+                    db.suaTenDanhSach(id, tenKhongTrung);
+                    Toast.makeText(context,"Sửa tên danh sách thành công",Toast.LENGTH_SHORT).show();
+                }else
+                    Toast.makeText(context,"Tên mới không được trùng với tên cũ",Toast.LENGTH_SHORT).show();
+
                 if (callback != null) {
                     callback.reloadDanhSach();
                 }
-                Toast.makeText(context,"Sửa tên danh sách thành công",Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(context,"Tên danh sách không được để trống!",Toast.LENGTH_SHORT).show();
