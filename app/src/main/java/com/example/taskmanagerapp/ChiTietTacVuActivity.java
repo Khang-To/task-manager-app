@@ -218,6 +218,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
         if (ngayDenHan.equals("Ngày đến hạn")) {
             ngayDenHan = "";
         }
+
         try {
             CongViec cv = new CongViec(id, noiDung, thoiGianNhac, ngayDenHan, ghiChu, newTrangThai, newLoai, danhSachId);
             long taskId = dbHelper.capNhatCongViec(cv);
@@ -266,7 +267,14 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
         CongViec congViec = dbHelper.getCongViecById(id);
         if (congViec != null) {
             editTextNoiDungCV.setText(congViec.getTen());
-            txtNgayDenHan.setText(congViec.getNgayDenHan());
+
+            // Nếu ngày đến hạn rỗng -> để lại chữ mặc định
+            if (congViec.getNgayDenHan() == null || congViec.getNgayDenHan().isEmpty()) {
+                txtNgayDenHan.setText("Ngày đến hạn");
+            } else {
+                txtNgayDenHan.setText(congViec.getNgayDenHan());
+            }
+
             txtNhacToi.setText(congViec.getNgayNhac());
             txtGhiChu.setText(congViec.getGhiChu());
             checkBoxCV.setChecked(congViec.getTrangThai() == 1);
@@ -280,5 +288,6 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             }
         }
     }
+
 
 }
