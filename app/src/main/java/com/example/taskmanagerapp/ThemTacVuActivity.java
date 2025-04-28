@@ -124,6 +124,10 @@ public class ThemTacVuActivity extends BottomSheetDialogFragment {
                 ngayDenHan = "";
             }
 
+            if (tgNhac.equals("Nhắc tôi")) {
+                tgNhac = "";
+            }
+
             if (tenCV.isEmpty()) {
                 editText.setError("Vui lòng nhập công việc");
                 return;

@@ -218,8 +218,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     db.suaTenDanhSach(id, tenKhongTrung);
                     Toast.makeText(context,"Sửa tên danh sách thành công",Toast.LENGTH_SHORT).show();
                 }else
-                    Toast.makeText(context,"Tên mới không được trùng với tên cũ",Toast.LENGTH_SHORT).show();
-
+                    dialog.cancel();
                 if (callback != null) {
                     callback.reloadDanhSach();
                 }

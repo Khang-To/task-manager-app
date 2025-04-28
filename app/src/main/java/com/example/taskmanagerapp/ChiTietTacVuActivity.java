@@ -178,6 +178,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year1, month1, dayOfMonth) -> {
                     String date = dayOfMonth + "/" + (month1 + 1) + "/" + year1;
+                    target.setBackgroundResource(R.drawable.bg_dachon_tg);
                     target.setText(date);
                 }, year, month, day);
         datePickerDialog.show();
@@ -197,6 +198,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
                             (timeView, hourOfDay, minute1) -> {
                                 String result = String.format(Locale.getDefault(), "%02d/%02d/%04d - %02d:%02d",
                                         dayOfMonth, month1 + 1, year1, hourOfDay, minute1);
+                                target.setBackgroundResource(R.drawable.bg_dachon_tg);
                                 target.setText(result);
                             }, hour, minute, true);
                     timePickerDialog.show();
@@ -215,8 +217,13 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
         int newLoai = isStarFilled ? 1 : 0;
         int newTrangThai = checkBoxCV.isChecked() ? 1 : 0;
         String ngayDenHan = txtNgayDenHan.getText().toString().trim();
+
         if (ngayDenHan.equals("Ngày đến hạn")) {
             ngayDenHan = "";
+        }
+
+        if (thoiGianNhac.equals("Nhắc tôi")) {
+            thoiGianNhac = "";
         }
 
         try {
@@ -271,11 +278,21 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             // Nếu ngày đến hạn rỗng -> để lại chữ mặc định
             if (congViec.getNgayDenHan() == null || congViec.getNgayDenHan().isEmpty()) {
                 txtNgayDenHan.setText("Ngày đến hạn");
+                txtNgayDenHan.setBackgroundResource(R.drawable.bg_macdinh);
             } else {
                 txtNgayDenHan.setText(congViec.getNgayDenHan());
+                txtNgayDenHan.setBackgroundResource(R.drawable.bg_dachon_tg);
             }
 
-            txtNhacToi.setText(congViec.getNgayNhac());
+            // Xử lý nhắc tới
+            if (congViec.getNgayNhac() == null || congViec.getNgayNhac().isEmpty()) {
+                txtNhacToi.setText("Nhắc tôi");
+                txtNhacToi.setBackgroundResource(R.drawable.bg_macdinh);
+            } else {
+                txtNhacToi.setText(congViec.getNgayNhac());
+                txtNhacToi.setBackgroundResource(R.drawable.bg_dachon_tg);
+            }
+
             txtGhiChu.setText(congViec.getGhiChu());
             checkBoxCV.setChecked(congViec.getTrangThai() == 1);
             danhSachId = congViec.getDanhSachId();
