@@ -305,5 +305,4 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.delete("DanhSachCongViec", "id = ?", new String[]{String.valueOf(id)});
         db.close();
     }
-
 }

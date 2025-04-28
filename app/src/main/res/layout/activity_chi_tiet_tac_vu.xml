@@ -12,28 +12,32 @@
 
     <TextView
         android:id="@+id/datTGNhac3"
-        android:layout_width="261dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="237dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="7dp"
         android:text="Nhắc tôi"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_alarm_24"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/datNgayHan3"
-        android:layout_width="265dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="237dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="10sp"
+        android:paddingBottom="8dp"
         android:text="Thêm ngày đến hạn"
         android:textSize="20sp"
         app:drawableStartCompat="@drawable/baseline_calendar_month_24"
         app:layout_constraintBottom_toTopOf="@+id/datTGNhac3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintHorizontal_bias="0.196"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -87,12 +91,12 @@
         android:id="@+id/txtGhiChu"
         android:layout_width="399dp"
         android:layout_height="259dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="24dp"
         android:background="@android:drawable/edit_text"
         android:gravity="start|top"
         android:hint="Nhập ghi chú..."
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnLuuGhiChu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
