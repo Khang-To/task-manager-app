@@ -50,7 +50,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
     private int id, trangThai, loai;
     private String ten;
     private EditText   txtGhiChu;
-//    private TextView datNgayHan3, datTGNhac3;
+    //    private TextView datNgayHan3, datTGNhac3;
     private Button btnSave;
     private static final String TAG = "ChiTietTacVuActivity";
     public static final String ACTION_CONG_VIEC_CHANGED = "com.example.taskmanagerapp.CONG_VIEC_CHANGED";
@@ -278,7 +278,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             // Nếu ngày đến hạn rỗng -> để lại chữ mặc định
             if (congViec.getNgayDenHan() == null || congViec.getNgayDenHan().isEmpty()) {
                 txtNgayDenHan.setText("Ngày đến hạn");
-                txtNgayDenHan.setBackgroundResource(R.drawable.bg_macdinh);
+                txtNgayDenHan.setBackgroundResource(android.R.color.transparent);
             } else {
                 txtNgayDenHan.setText(congViec.getNgayDenHan());
                 txtNgayDenHan.setBackgroundResource(R.drawable.bg_dachon_tg);
@@ -287,7 +287,7 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             // Xử lý nhắc tới
             if (congViec.getNgayNhac() == null || congViec.getNgayNhac().isEmpty()) {
                 txtNhacToi.setText("Nhắc tôi");
-                txtNhacToi.setBackgroundResource(R.drawable.bg_macdinh);
+                txtNhacToi.setBackgroundResource(android.R.color.transparent);
             } else {
                 txtNhacToi.setText(congViec.getNgayNhac());
                 txtNhacToi.setBackgroundResource(R.drawable.bg_dachon_tg);
@@ -305,6 +305,4 @@ public class ChiTietTacVuActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }

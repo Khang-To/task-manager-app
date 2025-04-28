@@ -91,12 +91,12 @@
         android:id="@+id/txtGhiChu"
         android:layout_width="399dp"
         android:layout_height="259dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="24dp"
         android:background="@android:drawable/edit_text"
         android:gravity="start|top"
         android:hint="Nhập ghi chú..."
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnLuuGhiChu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
